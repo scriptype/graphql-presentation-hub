@@ -1,0 +1,8 @@
+#!/bin/sh
+cd node-graphql
+git pull
+
+cd ../react-apollo
+git pull
+
+cd ..
