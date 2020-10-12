@@ -12,4 +12,4 @@ services:
     build: ./node-graphql
     env_file: ./node-graphql/.env
     ports:
-      - 5000:5000
+      - 4000:4000
