@@ -6,3 +6,4 @@ cd ../react-apollo
 git pull
 
 cd ..
+git pull
