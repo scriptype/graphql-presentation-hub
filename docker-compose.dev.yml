@@ -1,0 +1,12 @@
+# Dev specific setup. e.g. Mount directories as volumes for smooth devx.
+version: '3.8'
+services:
+  web:
+    volumes:
+      - ./react-apollo:/app
+      - /app/node_modules/
+
+  graphql:
+    volumes:
+      - ./node-graphql:/app
+      - /app/node_modules/
