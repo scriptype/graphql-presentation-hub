@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  web:
+    build: ./react-apollo
+    volumes:
+      - /app/node_modules/
+    environment:
+      NODE_ENV: production
+    stdin_open: true
+    networks:
+      - app_network
+    ports:
+      - 80:80
+
+  graphql:
+    build: ./node-graphql
+    volumes:
+      - /app/node_modules/
+    env_file: ./node-graphql/.env
+    environment:
+      NODE_ENV: production
+    networks:
+      - app_network
+    ports:
+      - 4000:4000
+
+networks:
+  app_network:
