@@ -2,8 +2,15 @@
 version: '3.3'
 services:
   web:
+    env_file: ./react-apollo/.env.production
     environment:
       NODE_ENV: production
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - 5000:80
 
   graphql:
     environment:
