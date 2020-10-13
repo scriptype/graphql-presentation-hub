@@ -31,16 +31,16 @@ services:
     ports:
       - 4000:4000
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - web-build:/var/www/html
-    depends_on:
-      - web
-    command: certonly --webroot --webroot-path=/var/www/html --email scriptyper@gmail.com --agree-tos --no-eff-email --force-renewal -d react-app.gq  -d www.react-app.gq
+        #  certbot:
+        #    image: certbot/certbot
+        #    container_name: certbot
+        #    volumes:
+        #      - certbot-etc:/etc/letsencrypt
+        #      - certbot-var:/var/lib/letsencrypt
+        #      - web-build:/var/www/html
+        #    depends_on:
+        #      - web
+        #    command: certonly --webroot --webroot-path=/var/www/html --email scriptyper@gmail.com --agree-tos --no-eff-email --force-renewal -d chargin.cf -d www.chargin.cf
 
 volumes:
   certbot-etc:
