@@ -1,0 +1,20 @@
+#!/bin/bash
+
+function toggle {
+  local conf_dir="nginx-conf"
+
+  if [[ -f $conf_dir/default-ssl.conf ]]
+  then
+    touch nginx-conf/default-no-ssl.conf
+    mv $conf_dir/default.conf nginx-conf/default-no-ssl.conf
+    mv $conf_dir/default-ssl.conf nginx-conf/default.conf
+    echo "Now using nginx for https/2"
+  else
+    touch nginx-conf/default-ssl.conf
+    mv $conf_dir/default.conf nginx-conf/default-ssl.conf
+    mv $conf_dir/default-no-ssl.conf nginx-conf/default.conf
+    echo "Now using nginx for http/1.1"
+  fi
+}
+
+toggle;
