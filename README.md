@@ -75,6 +75,9 @@ you have these:
 - DNS lookups pointed on the registrar side to cloud provider's name servers.
 - Necessary A and CNAME records added on the cloud provider side.
 
+Firstly, you would need to replace occurences of `chargin.cf` and `www.chargin.cf`
+in nginx configs and docker-compose.yml with your own domain name.
+
 Once you're good to go, ssh into the server and do the following:
 
 ```sh
