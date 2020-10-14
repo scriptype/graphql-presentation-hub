@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Clone frontend
 git clone git@github.com:scriptype/graphql-presentation-react-apollo.git react-apollo
