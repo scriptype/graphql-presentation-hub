@@ -1,8 +1,12 @@
 # GraphQL Presentation Hub
 
-This repo is used for deploying the 2 parts of the GraphQL presentation app.
+This repo is used for deploying the 2 parts of the GraphQL presentation app. For
+local development environment, this repo can be ignored.
 
-Currently there's no CI/CD pipeline.
+The workflow is designed with the idea of using a DigitalOcean droplet that has
+docker pre-installed in it.
+
+Currently there's no CI/CD pipeline to automate the deployment process.
 
 ## How to deploy for the first time
 
@@ -23,7 +27,7 @@ cd app
 echo "REACT_APP_GRAPHQL_API_URL=<API_URL>" > ./react-apollo/.env.production
 echo "API_BASE_URL=<CHARGING_STATIONS_REST_API_URL>" > ./node-graphql/.env
 
-# Get our system up and running
+# Get the system up and running
 # Docker should start in detached mode, so you can use the session for other things.
 # App should be accessible through http on the IP once the system is up and running.
 docker-compose up -d
@@ -68,12 +72,15 @@ By default, the project is configured to deploy a non-secure http/1.1 nginx.
 When you decide to switch to a secure connection (with a domain name), make sure
 you have these:
 - A domain
-- DNS lookups pointed on the registrar side to cloud provider's name servers. 
+- DNS lookups pointed on the registrar side to cloud provider's name servers.
 - Necessary A and CNAME records added on the cloud provider side.
 
 Once you're good to go, ssh into the server and do the following:
 
 ```sh
+# Change to app directory
+cd app
+
 # Switch to using nginx config for SSL connection.
 # It should print: "Now using nginx for https/2".
 ./toggle-nginx-ssl
