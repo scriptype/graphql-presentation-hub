@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+set -x
+cd react-apollo
+git pull
+cd ..
+docker-compose up --build
