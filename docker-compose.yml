@@ -3,11 +3,7 @@ services:
   web:
     build: ./react-apollo
     volumes:
-      - acme:/var/www/html/acme
       - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - dhparam:/etc/ssl/certs
       - /app/node_modules/
     environment:
       NODE_ENV: production
@@ -17,7 +13,6 @@ services:
       - app_network
     ports:
       - 80:80
-      - 443:443
 
   graphql:
     build: ./node-graphql
@@ -30,28 +25,6 @@ services:
       - app_network
     ports:
       - 4000:4000
-
-# certbot:
-#   image: certbot/certbot
-#   container_name: certbot
-#   volumes:
-#     - certbot-etc:/etc/letsencrypt
-#     - certbot-var:/var/lib/letsencrypt
-#     - acme:/var/www/html/acme
-#   depends_on:
-#     - web
-#   command: certonly --webroot --webroot-path=/var/www/html/acme --email scriptyper@gmail.com --agree-tos --no-eff-email --force-renewal -d chargin.cf -d www.chargin.cf
-
-volumes:
-  certbot-etc:
-  certbot-var:
-  acme:
-  dhparam:
-    driver: local
-    driver_opts:
-      type: none
-      device: /root/app/dhparam/
-      o: bind
 
 networks:
   app_network:

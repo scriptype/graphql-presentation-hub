@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function toggle {
+  local conf_dir="nginx-conf"
+
+  if [[ -f $conf_dir/default-ssl.conf ]]
+  then
+    touch $conf_dir/default-no-ssl.conf
+    mv $conf_dir/default.conf $conf_dir/default-no-ssl.conf
+    mv $conf_dir/default-ssl.conf $conf_dir/default.conf
+    echo "Now using nginx.conf for https/2"
+
+    touch docker-compose-no-ssl.yml
+    mv docker-compose.yml docker-compose-no-ssl.yml
+    mv docker-compose-ssl.yml docker-compose.yml
+    echo "Now using docker-compose.yml for https/2"
+  else
+    touch $conf_dir/default-ssl.conf
+    mv $conf_dir/default.conf $conf_dir/default-ssl.conf
+    mv $conf_dir/default-no-ssl.conf $conf_dir/default.conf
+    echo "Now using nginx for http/1.1"
+
+    touch docker-compose-ssl.yml
+    mv docker-compose.yml docker-compose-ssl.yml
+    mv docker-compose-no-ssl.yml docker-compose.yml
+    echo "Now using docker-compose.yml for http/1.1"
+  fi
+}
+
+toggle;

@@ -75,12 +75,10 @@ Once you're good to go, ssh into the server and do the following:
 cd app
 
 # Switch to using nginx config for SSL connection.
-# It should print: "Now using nginx for https/2".
-./toggle-nginx-ssl
-
-# Comment-in the certbot part in the docker-compose.yml
-# (Remove `#` characters before the certbot block, and adjust the indentation)
-vim docker-compose.yml
+# It should print:
+# "Now using nginx.conf for https/2".
+# "Now using docker-compose.yml for https/2".
+./toggle-ssl
 
 # Create folder for storing Diffie-Hellman parameters (used for obtaining SSL certificates)
 mkdir dhparam
@@ -94,14 +92,13 @@ docker-compose up -d --build
 # Check if certbot successfully obtained the certificates
 docker logs <certbot-container-id>
 
-# If so, we don't need to run certbot from now on (until renewal time)
-# So, again comment-out the certbot-related parts in docker-compose
-# (Put # character before lines in certbot block)
+# If so, we don't need to run certbot (and send renewal request on every deploy)
+# from now on (until renewal time). So, comment-out the certbot-related parts in
+# docker-compose.yml (Put # character before lines in certbot block).
 vim docker-compose.yml
 
 # That's it! If everything went as planned, our service now should be accessible
-# via https/2. We reverted our docker-compose to avoid running certbot on every deploy.
-# That's because of API rate-limits of letsencrypt.
+# via https/2.
 
 # TODO: Handle automatic certificate renewal.
 ```
