@@ -3,4 +3,4 @@ set -x
 cd react-apollo
 git pull
 cd ..
-docker-compose up --build
+docker-compose up -d --build
