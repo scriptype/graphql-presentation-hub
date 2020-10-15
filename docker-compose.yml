@@ -3,7 +3,7 @@ services:
   web:
     build: ./react-apollo
     volumes:
-      - web-build:/var/www/html
+      - acme:/var/www/html/acme
       - ./nginx-conf:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
@@ -31,21 +31,21 @@ services:
     ports:
       - 4000:4000
 
-        #  certbot:
-        #    image: certbot/certbot
-        #    container_name: certbot
-        #    volumes:
-        #      - certbot-etc:/etc/letsencrypt
-        #      - certbot-var:/var/lib/letsencrypt
-        #      - web-build:/var/www/html
-        #    depends_on:
-        #      - web
-        #    command: certonly --webroot --webroot-path=/var/www/html --email scriptyper@gmail.com --agree-tos --no-eff-email --force-renewal -d chargin.cf -d www.chargin.cf
+# certbot:
+#   image: certbot/certbot
+#   container_name: certbot
+#   volumes:
+#     - certbot-etc:/etc/letsencrypt
+#     - certbot-var:/var/lib/letsencrypt
+#     - acme:/var/www/html/acme
+#   depends_on:
+#     - web
+#   command: certonly --webroot --webroot-path=/var/www/html/acme --email scriptyper@gmail.com --agree-tos --no-eff-email --force-renewal -d chargin.cf -d www.chargin.cf
 
 volumes:
   certbot-etc:
   certbot-var:
-  web-build:
+  acme:
   dhparam:
     driver: local
     driver_opts:
