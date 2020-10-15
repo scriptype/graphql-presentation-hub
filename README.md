@@ -1,14 +1,21 @@
 # GraphQL Presentation Hub
 
-This repo is used for deploying the 2 parts of the GraphQL presentation app. For
-local development environment, this repo can be ignored.
+This repo is used for preparing the production environment of GraphQL presentation
+app. For local development environment, this repo can be ignored.
+
+In short:
+
+- Instructions here can be followed to set up the system for the first time.
+- CI/CD pipeline of the app is handled by Travis (separately for [React-Apollo](https://github.com/scriptype/graphql-presentation-react-apollo) and [Node-GraphQL](https://github.com/scriptype/graphql-presentation-node-graphql)).
+- However, changes made here, in this repo, should be manually pulled to production.
+- Docker compose and nginx configs and deploy scripts that Travis uses live here.
+- Docker compose is used for getting the app up and running in production
+- There are 2 nginx configs. One for SSL + http/2 connection, one for http/1.1.
+
+## How to deploy for the first time
 
 The workflow is designed with the idea of using a DigitalOcean droplet that has
 docker pre-installed in it.
-
-Currently there's no CI/CD pipeline to automate the deployment process.
-
-## How to deploy for the first time
 
 `ssh` into your server, and then do the following:
 
@@ -33,24 +40,6 @@ echo "API_BASE_URL=<CHARGING_STATIONS_REST_API_URL>" > ./node-graphql/.env
 docker-compose up -d
 ```
 
-## How to deploy the next iterations
-
-Once the initial setup is done, deploying future changes is simpler.
-
-Again, `ssh` into your server, and then do the following:
-
-```sh
-# Go to app folder
-cd app
-
-# Pull the latest changes in all parts of the project
-./pull
-
-# Build docker images, recreate containers and run the project setup
-# When it finishes building, new version of the app should be ready & accessible.
-docker-compose up -d --build --force-recreate
-```
-
 ## Nice to know docker commands
 
 These commands helped me to understand better what's happening inside containers:
@@ -63,6 +52,7 @@ docker logs <container-id> --follow
 docker exec <container-id> <command>
 
 # When you want to remove everything unused, to open up some disk space
+# This can be dangerous, as it will remove volumes too.
 docker system prune -af
 ```
 
@@ -112,4 +102,6 @@ vim docker-compose.yml
 # That's it! If everything went as planned, our service now should be accessible
 # via https/2. We reverted our docker-compose to avoid running certbot on every deploy.
 # That's because of API rate-limits of letsencrypt.
+
+# TODO: Handle automatic certificate renewal.
 ```
