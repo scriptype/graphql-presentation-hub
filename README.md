@@ -78,7 +78,7 @@ cd app
 # It should print:
 # "Now using nginx.conf for https/2".
 # "Now using docker-compose.yml for https/2".
-./toggle-ssl
+./use-ssl
 
 # Create folder for storing Diffie-Hellman parameters (used for obtaining SSL certificates)
 mkdir dhparam
