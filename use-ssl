@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function use-ssl {
+  local conf_dir="nginx-conf"
+
+  touch $conf_dir/default-no-ssl.conf.sample
+  mv $conf_dir/default.conf $conf_dir/default-no-ssl.conf.sample
+  mv $conf_dir/default-ssl.conf.sample $conf_dir/default.conf
+  echo "Now using nginx.conf for https/2"
+
+  touch docker-compose-no-ssl.yml
+  mv docker-compose.yml docker-compose-no-ssl.yml
+  mv docker-compose-ssl.yml docker-compose.yml
+  echo "Now using docker-compose.yml for https/2"
+}
+
+use-ssl;
