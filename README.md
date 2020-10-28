@@ -1,7 +1,7 @@
 # GraphQL Presentation Hub
 
-This repo is used for preparing the production environment of GraphQL presentation
-app. For local development environment, this repo can be ignored.
+This repo is used for preparing the production environment of [GraphQL presentation
+app](https://chargin.cf) (Check out the [presentation!](https://slides.com/mustastum/react-graphql)). For local development environment, this repo can be ignored.
 
 In short:
 
